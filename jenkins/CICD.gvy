@@ -5,7 +5,7 @@ pipeline {
 	         steps {
                 // step1 
                 echo 'compiling..'
-		            git url: 'https://github.com/lerndevops/samplejavaapp'
+		            git url: 'https://github.com/arovijaydevops/samplejavaapp'
 		            sh script: '/opt/maven/bin/mvn compile'
            }
         }
@@ -34,10 +34,6 @@ pipeline {
             }			
         }
         stage('codecoverage') {
-
-           tools {
-              jdk 'java1.8'
-           }
 	         steps {
                 // step4
                 echo 'codecoverage..'
@@ -60,8 +56,8 @@ pipeline {
 	         steps {
               withDockerRegistry(credentialsId: 'DOCKER_HUB_LOGIN', url: 'https://index.docker.io/v1/') {
                     sh script: 'cd  $WORKSPACE'
-                    sh script: 'docker build --file Dockerfile --tag docker.io/lerndevops/samplejavaapp:$BUILD_NUMBER .'
-                    sh script: 'docker push docker.io/lerndevops/samplejavaapp:$BUILD_NUMBER'
+                    sh script: 'docker build --file Dockerfile --tag docker.io/arovijaydevops/samplejavaapp:$BUILD_NUMBER .'
+                    sh script: 'docker push docker.io/arovijaydevops/samplejavaapp:$BUILD_NUMBER'
               }	
            }		
         }
